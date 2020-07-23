@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:insert="~{fragments/main-template :: head/meta}"></th:block>
+    <th:block th:insert="~{fragments/main-template :: head/title}"></th:block>
+    <th:block th:insert="~{fragments/main-template :: link}"></th:block>
+    <th:block th:insert="~{fragments/main-template :: head/script}"></th:block>
+
+
+</head>
+
+<body>
+
+<div th:replace="~{fragments/main-template :: mainNavbar}"></div>
+<div th:replace="~{fragments/main-template :: mainMobileNav}"></div>
+<div th:replace="~{fragments/main-template :: topMobileNav}"></div>
+
+
+<div class="mainJumbo" th:fragment="mainJumbo">
+    <div class="container mainPage">
+        <div class="row" id="jumboRow">
+            <div class="col-xl-10 offset-xl-1" style="padding: 5px 0px 10px 0px;">
+                <div class="border border-white rounded mediatweet" th:each="tweet: ${tweets}">
+                    <div class="media">
+                        <img class="align-self-center mr-3" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg" alt="Generic placeholder image">
+                        <div class="media-body">
+                            <h5 class="mt-0 font-weight-bold" th:text="${tweet.getUserT().getFullName()}"></h5>
+                            <h6 th:text="'@' + ${tweet.getUserT().getUserHandle()}"></h6>
+                            <div class="tweetdata">
+                                <span th:text="${tweet.getTweetData()}"}></span>
+                                <div class="likeRetweetGroup">
+                                    <button class="btn-primary">Like</button>
+                                    <button class="btn-primary">Retweet</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+
+</html>

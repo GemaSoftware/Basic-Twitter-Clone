@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>twittermainpage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css">
+    <link rel="stylesheet" href="/assets/css/customlogin.css">
+    <!--<link rel="stylesheet" href="assets/css/Navigation-with-Button.css">-->
+    <link rel="stylesheet" href="/assets/css/Registration-Form-with-Photo.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css"  href="/assets/css/mycustomcss.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<div class="mainNavbar d-none d-lg-block" th:fragment="mainNavbar">
+    <div class="d-none d-lg-block">
+        <nav class="navbar navbar-dark navbar-expand-md sticky-top navigation-clean-button">
+            <div class="container-fluid"><a class="navbar-brand" href="/">Twitter<span style="color: rgb(255,63,63);">Clone</span></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div
+                        class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav mr-auto">
+                        <li class="nav-item" role="presentation"><a class="nav-link active" href="#">First Item</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/tweets/create">Create Tweet</a></li>
+                        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Dropdown </a>
+                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">First Item</a><a class="dropdown-item" role="presentation" href="#">Second Item</a><a class="dropdown-item" role="presentation" href="#">Third Item</a></div>
+                        </li>
+                    </ul>
+                    <span sec:authorize="isAnonymous()" class="navbar-text actions">
+                        <a class="login" href="/login">Log In</a>
+                        <a class="btn btn-light action-button" role="button" href="/register">Sign Up</a>
+                    </span>
+                    <span sec:authorize="isAuthenticated()" class="navbar-text actions">
+                        <a class="profile" href="/profile" sec:authentication="principal.fullName"></a>
+                        <a class="btn btn-light action-button" role="button" href="/logout">Logout</a>
+                    </span>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="mainnav d-lg-none" th:fragment="mainMobileNav">
+    <nav class="navmobile">
+        <a href="/" class="nav__link">
+            <i class="fa fa-tachometer nav__icon" aria-hidden="true"></i>
+            <span class="nav__text">Home</span>
+        </a>
+        <a href="/tweets/create" class="nav__link nav__link--active">
+            <i class="fa fa-plus nav__icon" aria-hidden="true"></i>
+            <span class="nav__text">New Tweet</span>
+        </a>
+        <a href="/profile" class="nav__link">
+            <i class="fa fa-user nav__icon" aria-hidden="true"></i>
+            <span class="nav__text">Profile</span>
+        </a>
+    </nav>
+</div>
+
+<div class="mobilenavheader d-lg-none" th:fragment="topMobileNav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <a class="navbar-brand-darka" href="#">
+            <i class="fa fa-plane" aria-hidden="true"></i>
+            Rettiwt
+        </a>
+
+
+        <div class="loginLogoutGroup my-2 mr-sm-2" sec:authorize="isAnonymous()">
+            <a href="/login">
+                <button class="btn btn-primary">Login</button>
+            </a>
+            <a href="/register">
+                <button class="btn btn-primary">Register</button>
+            </a>
+        </div>
+        <div class="loginLogoutGroup my-2 mr-sm-2" sec:authorize="isAuthenticated()">
+            <a href="/logout">
+                <button class="btn btn-primary">Logout</button>
+            </a>
+        </div>
+    </nav>
+</div>
+
+
+<div class="mainLogInForm" th:fragment="mainLogInForm">
+        <div class="login-clean">
+            <form method="post" th:action="@{/login}">
+                <h2 class="sr-only">Login Form</h2>
+                <div class="illustration"><i class="icon ion-ios-navigate"></i></div>
+                <div class="form-group"><input type="text" class="form-control" name="username" placeholder="Username" /></div>
+                <div class="form-group"><input type="password" class="form-control" name="password" placeholder="Password" /></div>
+                <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div><a class="forgot" href="/register">Need to create an account? Click here.</a></form>
+    </div>
+
+</div>
+
+<div class="mainRegisterForm" th:fragment="mainRegisterForm">
+    <div class="register-photo">
+        <div class="form-container">
+            <div class="image-holder"></div>
+            <form method="post" th:action="@{/register}" th:object="${userForm}">
+                <h2 class="text-center"><strong>Create</strong> an account.</h2>
+                <div class="form-group"><input type="text" th:field="*{username}" class="form-control" name="username" placeholder="Username" /></div>
+                <div class="form-group"><input type="password" th:field="*{password}" class="form-control" name="password" placeholder="Password" /></div>
+                <div class="form-group"><input type="text" th:field="*{fullName}" class="form-control" name="full-name" placeholder="Full Name" /></div>
+                <div class="form-group">
+                    <div class="form-check"><label class="form-check-label"><input type="checkbox" class="form-check-input" />I agree to the license terms.</label></div>
+                </div>
+                <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Sign Up</button></div><a class="already" href="/login">You already have an account? Login here.</a></form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<footer class="page-footer font-small customfooter fixed-bottom" th:fragment="myfooter">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://localhost:8080/"> AnimeStorage.com</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
+

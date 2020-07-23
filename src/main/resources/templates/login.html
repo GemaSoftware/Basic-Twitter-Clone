@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:insert="~{fragments/main-template :: head/meta}"></th:block>
+    <th:block th:insert="~{fragments/main-template :: head/title}"></th:block>
+    <th:block th:insert="~{fragments/main-template :: link}"></th:block>
+</head>
+
+<body>
+
+<div th:replace="~{fragments/main-template :: mainNavbar}"></div>
+<div th:replace="~{fragments/main-template :: mainMobileNav}"></div>
+
+<div th:replace="~{fragments/main-template :: mainLogInForm}"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/script.min.js"></script>
+</body>
+
+</html>

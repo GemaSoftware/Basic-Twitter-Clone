@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:insert="~{fragments/main-template :: head/meta}"></th:block>
+    <th:block th:insert="~{fragments/main-template :: head/title}"></th:block>
+    <th:block th:insert="~{fragments/main-template :: link}"></th:block>
+    <th:block th:insert="~{fragments/main-template :: head/script}"></th:block>
+</head>
+
+<body>
+
+<div th:replace="~{fragments/main-template :: mainNavbar}"></div>
+<div th:replace="~{fragments/main-template :: mainMobileNav}"></div>
+
+<div class="mainTweetCreateForm">
+    <div class="container">
+        <form th:action="@{/tweets/create}" th:object="${tweet}" class="tweetform" method="post">
+            <h1>Create New Tweet</h1>
+            <textarea type="text" class="form-control" th:field="*{tweetData}"></textarea>
+            <button class="btn btn-primary" type="submit" >Create Tweet</button>
+        </form>
+    </div>
+    </div>
+
+</body>
+
+</html>
